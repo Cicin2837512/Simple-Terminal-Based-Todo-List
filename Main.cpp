@@ -56,7 +56,6 @@ void createNewTask() {
 }
 
 // THE REMOVE TASK FUNCTION IS IN PROGRESS NOW
-/*
 void removeTask() {
     int orderToRemove;
     std::cout << "Task order number (list tasks to see the number): ";
@@ -78,19 +77,21 @@ void removeTask() {
 
     tasksFileReadonly.close();
 
-    // Check if the specified order is valid
+	// Check if the specified order is valid
     if (orderToRemove > 0 && orderToRemove <= lines.size()) {
         // Remove the task with the specified order from the lines vector
-        lines.erase(lines.begin() + orderToRemove - 1);
+        lines.erase(lines.begin() + orderToRemove);
 
         // Update the order for the remaining tasks in the lines vector
-        for (int i = orderToRemove - 1; i < lines.size(); i++) {
+        for (int i = orderToRemove; i < lines.size(); ++i) {
             // Extract the order from each line and update it
             size_t pos = lines[i].find(".");
             if (pos != std::string::npos) {
-                lines[i].replace(0, pos, std::to_string(i + 1));
+                lines[i].replace(0, pos, std::to_string(i));
             }
         }
+
+		//for (int i = orderToRemove; i < lines.size(); ++i)
 
         // Open the file for writing
         std::ofstream tasksFile(filePath);
@@ -107,7 +108,6 @@ void removeTask() {
         std::cout << "Please enter a valid task number!\n";
     }
 }
-*/
 
 
 void listAllTasks() {
@@ -141,8 +141,8 @@ int main() {
 
 	// The start of the program
 	system("clear");
-	std::string version = "v0.1.0";
-	std::string name = "STBTD - SIMPLE TERMINAL-BASED TODO LIST";
+	std::string version = "v1.0.0";
+	std::string name = "STBTL - SIMPLE TERMINAL-BASED TODO LIST";
 	std::cout << "+==========================================|  " << name << "  " << version << " |==========================================+";
 
 
@@ -152,8 +152,7 @@ int main() {
 		// Firstly, let's list the actions you can do with this program
 		std::cout << "\nThe Actions You can do:\n";
 		std::cout << "1. New Task\n";
-		std::cout << "2. Mark Task As Done (does nothing, this feature is in development)" << 
-			" if you want to remove a task, remove it from $HOME/.config/tasks.txt\n";
+		std::cout << "2. Mark Task As Done (This simply removes the task entirely)\n";
 		std::cout << "3. List All Tasks\n";
 		std::cout << "4. Quit\n\n";
 		
@@ -179,7 +178,7 @@ int main() {
 				break;
 			case '2': 
 				// In progress
-				// removeTask();
+				removeTask();
 				break;
 			case '3': 
 				listAllTasks();
