@@ -141,8 +141,8 @@ int main() {
 
 	// The start of the program
 	system("clear");
-	std::string version = "v0.1.0";
-	std::string name = "STBTD - SIMPLE TERMINAL-BASED TODO LIST";
+	std::string version = "v0.1.1";
+	std::string name = "STBTL - SIMPLE TERMINAL-BASED TODO LIST";
 	std::cout << "+==========================================|  " << name << "  " << version << " |==========================================+";
 
 
