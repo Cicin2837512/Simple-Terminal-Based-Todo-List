@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ostream>
 #include <vector>
 #include <string>
 #include <limits>
@@ -24,7 +25,7 @@ void createNewTask() {
 	std::ifstream tasksFileReadonly(filePath);
 	if (!tasksFileReadonly.is_open()) {
 
-        std::cerr << "Error opening the file!" << std::endl;
+        std::cerr << "Error opening the file: " << filePath << std::endl;
         return; // Return an error code
     }
 
@@ -50,7 +51,7 @@ void createNewTask() {
 		tasksFile.close();
 	} else {
 
-		std::cout << "Error opening the file!\n";
+		std::cout << "Error opening the file: " << filePath << std::endl;
 		return; // Return an error code
 	}
 }
@@ -63,7 +64,7 @@ void removeTask() {
 
     std::ifstream tasksFileReadonly(filePath);
     if (!tasksFileReadonly.is_open()) {
-        std::cerr << "Error opening the file!" << std::endl;
+        std::cerr << "Error opening the file: " << filePath << std::endl;
         return;
     }
 
@@ -119,7 +120,7 @@ void listAllTasks() {
 	// Check if it was opened correctly
 	if (!tasksFileReadonly.is_open()) {
 	
-		std::cerr << "Something went wrong..";
+		std::cerr << "Error opening the file: " << filePath << std::endl;
 		return;
 	}
 
@@ -140,8 +141,12 @@ void listAllTasks() {
 int main() {
 
 	// The start of the program
+	#ifdef _WIN32
+	system("cls");
+	#else
 	system("clear");
-	std::string version = "v1.0.0";
+	#endif
+	std::string version = "v1.0.1";
 	std::string name = "STBTL - SIMPLE TERMINAL-BASED TODO LIST";
 	std::cout << "+==========================================|  " << name << "  " << version << " |==========================================+";
 
